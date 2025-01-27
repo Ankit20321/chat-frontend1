@@ -20,7 +20,7 @@ const AddUsers = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('token'); // Get JWT token
-      const response = await axios.get('http://localhost:5000/api/auth/users', {
+      const response = await axios.get('https://chat-backend1-wxxi.onrender.com/api/auth/users', {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
         },
@@ -52,7 +52,7 @@ const AddUsers = () => {
 
     try {
       const token = localStorage.getItem('token'); // Get JWT token
-      const response = await axios.post('http://localhost:5000/api/auth/signup', newUser, {
+      const response = await axios.post('https://chat-backend1-wxxi.onrender.com/api/auth/signup', newUser, {
         headers: {
           Authorization: `Bearer ${token}`, // Pass the token in the Authorization header
         },
@@ -145,7 +145,7 @@ const AddUsers = () => {
       });
   
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:5000/api/auth/upload-users', formData, {
+      const response = await axios.post('https://chat-backend1-wxxi.onrender.com/api/auth/upload-users', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',

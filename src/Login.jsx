@@ -33,7 +33,7 @@ const Login = ({ setIsLoggedIn, setUserInfo, handleLoginSuccess }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('https://chat-backend1-wxxi.onrender.com/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

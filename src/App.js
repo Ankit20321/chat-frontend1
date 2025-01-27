@@ -69,7 +69,7 @@ function App() {
     try {
       setUserInfo({ username: '', role: '' });
 
-      const response = await fetch('http://localhost:5000/api/auth/userInfo', {
+      const response = await fetch('https://chat-backend1-wxxi.onrender.com/api/auth/userInfo', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`,

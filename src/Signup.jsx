@@ -30,7 +30,7 @@ const Signup = ({ handleSignupSuccess }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch('https://chat-backend1-wxxi.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ const Signup = ({ handleSignupSuccess }) => {
   };
 
   const handleGoogleLogin = () => {
-    window.open('http://localhost:5000/api/auth/google', '_self');
+    window.open('https://chat-backend1-wxxi.onrender.com/api/auth/google', '_self');
   };
 
   return (
