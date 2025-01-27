@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo');
+:root {
+  /* violet */
+  --primary-color: 111, 76, 255;
+  
+  /* white */
+  --text-color: 256, 256, 256;
+}
+
+/* Reset and basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
+ 
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #101524; 
+  /* overflow: hidden; Prevents page scroll */
+}
+/* logo design */
+.title {
+  font-family: "Cairo";
+  text-align: center;
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  letter-spacing: 1px;
+  line-height:2
+}
+h1 {
+  background-image: url(https://media.giphy.com/media/26BROrSHlmyzzHf3i/giphy.gif);
+  background-size: cover;
+  color: transparent;
+  -moz-background-clip: text;
+  -webkit-background-clip: text;
+  text-transform: uppercase;
+  font-size: 120px;
+  margin: 10px 0;
+}
+
+/* General content layout for the chat page */
+.chat-content {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden; /* Prevents scroll on the entire page */
+  background-color: #00000c; 
+}
+
+/* Login/Signup page layout */
+.login-signup-content {
+  display: block; /* Ensures the content is laid out as a block */
+  height: 100vh; /* Ensure the height spans the full viewport */
+  overflow: auto; /* Allows scrolling if the content overflows */
+}
+
+/* For login and signup pages, reset the flexbox layout */
+.login-page-content {
+  display: block;
+  height: 100vh; /* Ensure it takes up the full viewport height */
+  overflow: auto; /* Allow scrolling if needed */
+}
+
+/* Center the login form and apply a background */
+.login-page {
+  background: url('../public/images/space2.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 2s ease-in-out;
+}
+
+.login-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+/* Login form styling */
+form {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure content and chat are hidden when on the login page */
+.app-container.login-page .content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container.login-page .navbar,
+.app-container.login-page .left-sidebar {
+  display: none;
+}
+
+/* Additional styling for the login form */
+form input, form button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+form button {
+  background-color: #784c79;
+  border: none;
+  color: #e8d5c5;
+  cursor: pointer;
+}
+
+
+
+
+.white-mode {
+  text-decoration: none;
+  padding: 7px 10px;
+  background-color: #122;
+  border-radius: 3px;
+  color: #FFF;
+  transition: .35s ease-in-out;
+  position: absolute;
+  left: 15px;
+  bottom: 15px;
+  font-family: "Montserrat";
+}
+
+.white-mode:hover {
+  background-color: #FFF;
+  color: #122;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* new btns */
+.btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 18px;
+  padding: 12px 32px;
+  margin: 1rem;
+  cursor: pointer;
+  width: 180px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+.btn:hover {
+  transition: all 0.3s ease;
+}
+.btn-glow:hover {
+  box-shadow: rgba(var(--primary-color), 0.5) 0px 0px 20px 0px;
+}
+.btn-gradient-border {
+  color: rgba(var(--text-color));
+  border: 2px double transparent;
+  background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)), radial-gradient(circle at left top, rgb(1, 110, 218), rgb(217, 0, 192));
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+.content {
+  display: flex;
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden; /* Prevents scroll on the entire page */
+}
+
+/* Chat main container */
+.chat-main {
+  flex-grow: 1;
+  padding: 15px; /* Add padding around the chat container */
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s, margin-right 0.3s;
+  overflow-y: hidden;
+  padding-bottom: 80px; /* Ensure space for input box at the bottom */
+}
+
+/* Chat container to manage the left sidebar space */
+.chat-container {
+  display: flex;
+  flex-direction: column; /* Change to column for vertical stacking */
+  flex-grow: 1;
+  position: relative;
+  padding-right: 20px;
+  padding-left: 20px;
+  overflow-y: auto;
+  max-height: calc(100vh - 140px); /* Ensure the chat stays within bounds */
+  background-color: #101524;
+}
+
+/* Messages Container */
+.messages {
+  flex-grow: 1;
+  padding-bottom: 70px; 
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: 100%; /* Ensure messages don't overflow the entire page */
+}
+
+@keyframes popUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.9); /* Moves up and slightly smaller */
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05); /* Moves a bit past the original position with slight overscale */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Settles back to its original position and size */
+  }
+}
+
+@keyframes glowing-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.input-container {
+  width: 20rem; /* Smaller width when unfocused */
+  height: 4rem;
+  padding: 0.3rem 0.3rem;
+  margin: 0 auto;
+  border-radius: 2rem; /* Make the container more rounded */
+  display: flex;
+  align-items: center;
+  background: #0e131f;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid #282d3e;
+  background-clip: padding-box;
+  transition: width 0.3s ease, height 0.3s ease, border 0.3s ease-in-out;
+}
+
+.input-container:focus-within {
+  width: 40rem; /* Expand width when focused */
+  height: 4rem; /* Slightly increase height on focus */
+  border: 2px solid transparent; /* Make the border transparent for the gradient effect */
+  background-image: linear-gradient(#0e131f, #0e131f), 
+                    linear-gradient(45deg, #aaf9f4, #4dbae5, #71f5fc, #e3f07e, #eaff00, #46f6ca, #a976e0, #9e34ef, #62b1ff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: glowing-border 20s linear infinite; /* Animated gradient on the border */
+  background-size: 400%;
+}
+
+.input-container input {
+  width: 100%;
+  height: 2.5rem;
+  font-size: 1rem;
+  padding: 8px;
+  background: #0e131f; 
+  backdrop-filter: blur(6px); /* Frosted glass effect */
+  -webkit-backdrop-filter: blur(6px); /* For Safari */
+  outline: none;
+  border: none;
+  color: #e8d5c5;
+  border-radius: 1.5rem; /* Rounded corners for the input field */
+  transition: border-radius 0.3s ease-in-out; /* Smooth rounding transition */
+}
+
+.input-container button {
+  padding: 10px 20px;
+  border-radius: 50%;
+  background-color: #0e131f; 
+  color: #e8d5c5;
+  border: none;
+  margin: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth hover transition */
+}
+
+@keyframes send-icon-tilt {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+input::placeholder {
+  color: #818aab;
+  font-weight: bold;
+}
+
+/* Send icon hover animation */
+.send-icon {
+  font-size: 1.5rem;
+  color: #dac8ba;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.send-icon:hover {
+  transform: rotate(20deg) scale(1.2); /* Rotate and scale */
+  color: #ffcc00; /* Optional color change */
+}
+
+/* Send icon click (send) animation */
+.send-icon.active {
+  animation: send-icon-tilt 0.3s ease-in-out;
+}
+
+.loader {
+  width: 24px; /* Adjust this value for smaller size */
+  aspect-ratio: 1;
+  position: relative;
+}
+
+.loader:before,
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  aspect-ratio: 1;
+  border-radius: 50px;
+  box-shadow: 0 0 0 2px inset #fff; /* Reduced the shadow thickness */
+  animation: l5 0.8s infinite linear alternate; /* Faster animation */
+}
+
+.loader:after {
+  inset: auto 0 0 auto;
+  animation-delay: -0.8s; /* Adjusted delay to match animation speed */
+}
+
+@keyframes l5 {
+  0% {
+    width: 12px; /* Smaller starting width */
+  }
+  100% {
+    width: 24px; /* Smaller ending width */
+  }
+}
+
+/* Ensure the placeholder appears properly in relation to the messages */
+.start-conversation {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: auto; /* Adjust height to fit content */
+  margin-bottom: 20px; /* Space between placeholder and messages */
+}
+
+.placeholder-text {
+  font-size: 24px;
+  color: #ccc; /* Light color for placeholder */
+  margin-bottom: 20px;
+  opacity: 1; /* Make sure it's visible */
+  transition: opacity 0.5s ease-in-out;
+}
+
+.suggestions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px; /* Add space between the cards */
+}
+
+.suggestion-card {
+  width: 170px;
+  height: 140px;
+  background-color: #2f2f42;
+  color: #fff;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.suggestion-card:hover {
+  background-color: #3f3f54;
+}
+
+.suggestion-card .icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.suggestion-card .text {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.small-gif {
+  width: 150px; /* Set the desired width */
+  height: auto; /* Auto-adjust height to maintain aspect ratio */
+}
+
+.start-button {
+  position: relative;
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: 240px;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 14px; /* Increased font size for better visibility */
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: sans-serif;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 15px;
+  z-index: 1;
+}
+
+.start-button:hover {
+  animation: animate 8s linear infinite;
+}
+
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+.start-button:hover:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
+  z-index: -1;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  border-radius: 40px;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.start-button:hover:before {
+  filter: blur(20px);
+  opacity: 1;
+  animation: animate 8s linear infinite;
+}
+
+.encloser {
+  opacity: 0; /* Start invisible for animation */
+  transition: opacity 0.5s ease-in-out; /* Smooth transition */
+}
+
+.fade-in {
+  opacity: 1; /* Make it visible when conversation starts */
+}
+
+/* Message Styles */
+.message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 70%;
+  word-wrap: break-word;
+  animation: popUp 0.4s ease-out; /* Apply pop-up animation */
+}
+
+.loading-message {
+  opacity: 0; /* Fully transparent */
+  transition: opacity 0.5s ease; /* Smooth transition */
+}
+
+.message.user {
+  background-color: #242d47; /* Slightly different shade for user messages */
+  color: #e8d5c5 !important;
+  border-radius: 20px 20px 5px 20px; /* Different border-radius for user */
+  padding: 10px 15px;
+  max-width: 60%;
+  margin-left: auto; /* Align to right */
+  margin-bottom: 20px;
+  font-weight: normal; /* Normal text weight for user */
+}
+
+.message.bot {
+  background-color: #232333; /* Dark color for bot messages */
+  color: #e8d5c5 !important; /* Text color */
+  font-weight: bold !important; /* Make bot message slightly bolder */
+  border-radius: 20px 20px 20px 3px; /* Customize border-radius for shape */
+  padding: 10px 15px;
+  max-width: 60%;
+  margin-bottom: 20px;
+}
+
+/* Styles for the source container */
+.source-container {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f0f4f8; /* Light background */
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight shadow for card effect */
+}
+
+/* Styles for the source list */
+.source-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Individual source card styling */
+.source-card {
+  margin: 10px 0;
+  padding: 12px;
+  background-color: #e8d5c5; /* White background for each card */
+  border: 1px solid #e0e0e0; /* Light border */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* Slight shadow for depth */
+}
+
+/* Source link styling */
+.source-link {
+  text-decoration: none;
+  color: #007bff; /* Blue text color */
+  font-weight: bold;
+}
+
+/* Hover effect on the source link */
+.source-link:hover {
+  text-decoration: underline;
+  color: #0056b3; /* Darker blue on hover */
+}
+
+/* General Page Scrollbar */
+.app-container::-webkit-scrollbar {
+  width: 8px; /* Adjust width as needed */
+}
+
+.app-container::-webkit-scrollbar-track {
+  background: transparent; /* Invisible track */
+}
+
+.app-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* Solid, subtle thumb */
+  border-radius: 100px; /* Rounded/pill-shaped */
+  transition: background 0.3s ease; /* Smooth transition for hover */
+}
+
+.app-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5); /* Slightly more visible on hover */
+}
+
+/* For Firefox */
+.app-container {
+  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent; /* Transparent track with subtle thumb */
+}
+
+/* Chat container full-height and scrollable without its own scrollbar */
+.chat-container {
+  height: 100vh; /* Full height of the viewport */
+  overflow-y: auto; /* Enable scrolling within the chat */
+  padding-right: 40px; /* Space between the content and the edge of the screen */
+}
