@@ -3,7 +3,7 @@ import axios from 'axios';
 // Existing queryAPI function
 export const queryAPI = async (session_id, text, llm_name, collection_name) => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/query', {
+    const response = await axios.post('http://129.154.243.12:8000/query', {
       session_id,
       text: text,
       llm_name: llm_name,
@@ -25,7 +25,7 @@ export const uploadFile = async (file, folder, createNewFolder) => {
   formData.append('create_new_folder', createNewFolder); // Pass flag for folder creation
 
   try {
-    const response = await axios.post('http://127.0.0.1:8000/upload', formData, {
+    const response = await axios.post('http://129.154.243.12:8000/upload', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -40,7 +40,7 @@ export const uploadFile = async (file, folder, createNewFolder) => {
 // API call to fetch the list of files
 export const getFiles = async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/files');
+    const response = await axios.get('http://129.154.243.12:8000/files');
     return response.data; // Return the list of files
   } catch (error) {
     console.error("Error fetching files:", error);
@@ -51,7 +51,7 @@ export const getFiles = async () => {
 // API call to delete a file
 export const deleteFile = async (folder, fileName) => {
   try {
-      const response = await axios.delete('http://127.0.0.1:8000/delete', {
+      const response = await axios.delete('http://129.154.243.12:8000/delete', {
           data: {
               folder,
               fileName
@@ -67,7 +67,7 @@ export const deleteFile = async (folder, fileName) => {
 // Add the function to get folders from the backend
 export const getFolders = async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/folders'); // Assuming the backend provides folders API
+    const response = await axios.get('http://129.154.243.12:8000/folders'); // Assuming the backend provides folders API
     return response.data; // Return folder data from the response
   } catch (error) {
     console.error("Error fetching folders:", error);
